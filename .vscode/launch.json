@@ -1,0 +1,15 @@
+{
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "name": "flaix-ui: debug in chrome ",
+      "type": "chrome",
+      "request": "launch",
+      "userDataDir": false,
+      "runtimeArgs": [
+        "--profile-directory=Profile 3",
+      ],
+      "url": "http://localhost:3000/"
+    }
+  ]
+}
