@@ -2,12 +2,12 @@
   "version": "0.2.0",
   "configurations": [
     {
-      "name": "flaix-ui: debug in chrome ",
+      "name": "flaix-ui: debug client",
       "type": "chrome",
       "request": "launch",
       "userDataDir": false,
       "runtimeArgs": [
-        "--profile-directory=Profile 3",
+        "--profile-directory=Web3DebugProfile",
       ],
       "url": "http://localhost:3000/"
     }

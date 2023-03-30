@@ -37,6 +37,26 @@ export default function Home() {
                 <ConnectKitProvider theme="auto" mode="light">
                     <CssBaseline />
                     <MainAppBar></MainAppBar>
+                    <div>
+                        <h2>Vault Information</h2>
+                        <ul>
+                            <li>Assets under Management (sum + details)</li>
+                            <li>Number of Shares</li>
+                            <li>Vault Share Price (balancer pool)</li>
+                            <li>Buy Sell (via balancer pool)</li>
+                        </ul>
+                        <h2>Call Options</h2>
+                        <ul>
+                            <li>Option name, symbol, maturity</li>
+                            <li>Option price (balancer pool)</li>
+                            <li>Total shares</li>
+                            <li>Underlying Asset + amount</li>
+                            <li>
+                                option value on revoke (asset amount per option)
+                            </li>
+                            <li>option value on exercise, (balancer pool)</li>
+                        </ul>
+                    </div>
                 </ConnectKitProvider>
             </WagmiConfig>
         </>
