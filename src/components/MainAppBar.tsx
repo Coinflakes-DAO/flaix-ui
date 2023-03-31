@@ -3,16 +3,17 @@ import { Button, ButtonGroup, Grid, Link, Typography } from "@mui/material";
 import { ConnectKitButton } from "connectkit";
 import { useNetwork } from "wagmi";
 
+import { useVault } from "../hooks/useVault";
+
 export default function MainAppBar() {
     const { chain } = useNetwork();
 
+    const { vault } = useVault();
     return (
         <Grid container mt={"1em"}>
             <Grid item xs={2}></Grid>
             <Grid item xs={3}>
-                <Typography variant="h4">
-                    Coinflakes AI Investement Vault
-                </Typography>
+                <Typography variant="h4">{vault?.name}</Typography>
             </Grid>
             <Grid
                 item
