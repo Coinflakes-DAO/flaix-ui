@@ -1,7 +1,8 @@
-import { useQuery } from "@tanstack/react-query";
+export {};
+/*import { useQuery } from "@tanstack/react-query";
 import { useState } from "react";
 import { fetchVault, fetchVaultAssets } from "../fetchers/fetchVault";
-import { erc20ABI, useContractRead, useContractReads } from "wagmi";
+import { erc20ABI, useContractReads } from "wagmi";
 import { BigNumber } from "ethers";
 
 export type Vault = {
@@ -18,6 +19,7 @@ export type VaultAsset = {
     symbol: string;
     decimals: number;
     priceUsd: number;
+    worthUsd: number;
     balance: BigNumber;
 };
 
@@ -54,12 +56,37 @@ export const useVault = (): UseVaultReturnType => {
         allowFailure: false,
     }) as { data: BigNumber[]; error: any };
 
+    const assetWorth;
+
     const assets = fetchVaultAssetsResult?.map((asset, index) => ({
         ...asset,
         balance: vaultAssetsBalances?.[index],
+        worthUsd: assetWorthUsd({
+            ...asset,
+            balance: vaultAssetsBalances?.[index],
+            worthUsd: 0,
+        }),
     }));
 
-    console.log(fetchVaultResult, assets);
+    //console.log(fetchVaultResult, assets);
+    console.log(assets);
 
     return { vault: fetchVaultResult, admin: fetchVaultResult?.admin, assets };
 };
+
+function assetWorthUsd(asset: VaultAsset): number {
+    const assetDecimals = BigNumber.from(10).pow(asset.decimals);
+    const assetPriceBN = BigNumber.from(Math.floor(asset.priceUsd * 10000))
+        .mul(assetDecimals)
+        .div(10000);
+    const assetWorthBN = assetPriceBN
+        .mul(asset.balance)
+        .div(BigNumber.from(10).pow(asset.decimals));
+    const leftStr = assetWorthBN.div(assetDecimals).toString();
+    let rightStr = assetWorthBN.mod(assetDecimals).toString();
+    if (rightStr.length < asset.decimals) {
+        rightStr = rightStr.padStart(asset.decimals - rightStr.length, "0");
+    }
+    return Number.parseFloat(`${leftStr}.${rightStr}`);
+}
+*/

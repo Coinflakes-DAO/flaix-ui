@@ -3,12 +3,12 @@ import { Button, ButtonGroup, Grid, Link, Typography } from "@mui/material";
 import { ConnectKitButton } from "connectkit";
 import { useNetwork } from "wagmi";
 
-import { useVault } from "../hooks/useVault";
+import { useVaultMetadata } from "../hooks/useVaultMetadata";
 
 export default function MainAppBar() {
     const { chain } = useNetwork();
 
-    const { vault } = useVault();
+    const { data: vault } = useVaultMetadata();
     return (
         <Grid container mt={"1em"}>
             <Grid item xs={2}></Grid>
