@@ -1,45 +1,45 @@
 import { useVaultAssets } from "../hooks/useVaultAssets";
 import { useVaultAssetMetadata } from "../hooks/useVaultAssetMetadata";
-import { useVaultAssetBalance } from "../hooks/useVaultAssetBalance";
 import { numberFormat } from "../lib/formats";
 import { useVaultAssetPrice } from "../hooks/useVaultAssetPrice";
-import { BigNumber } from "ethers";
-import { BN_10E, BN_ZERO } from "../lib/constants";
+import { useVaultAssetsTotalWorth } from "../hooks/useVaultAssetsTotalWorth";
 
 function VaultAsset(props: { assetAddress: `0x${string}` }) {
     const { assetAddress } = props;
     const { data: assetMetadata } = useVaultAssetMetadata({ assetAddress });
-    const { data: assetBalance } = useVaultAssetBalance({ assetAddress });
-    const { data: assetPrice } = useVaultAssetPrice({ assetAddress });
-    const bnAssetPrice =
-        assetPrice && assetMetadata
-            ? BigNumber.from(Math.floor(assetPrice.priceUsd * 10000))
-                  .mul(BN_10E(assetMetadata.decimals))
-                  .div(10000)
-            : BN_ZERO;
-    const bnAssetWorth =
-        assetMetadata && assetBalance
-            ? bnAssetPrice.mul(assetBalance).div(BN_10E(assetMetadata.decimals))
-            : BN_ZERO;
+    const { data: assetTokenomics } = useVaultAssetPrice({ assetAddress });
+
     return (
         <li>
             {assetMetadata?.name}:{" "}
             {numberFormat(
-                assetBalance,
+                assetTokenomics?.balance,
                 assetMetadata?.symbol,
                 2,
-                assetMetadata?.decimals
+                assetTokenomics?.decimals
             )}
             {" @ "}
-            {numberFormat(bnAssetPrice, "USD", 2, assetMetadata?.decimals)}
+            {numberFormat(
+                assetTokenomics?.priceUsd,
+                "USD",
+                2,
+                assetTokenomics?.decimals
+            )}
             {" = "}
-            {numberFormat(bnAssetWorth, "USD", 2, assetMetadata?.decimals)}
+            {numberFormat(
+                assetTokenomics?.worthUsd,
+                "USD",
+                2,
+                assetTokenomics?.decimals
+            )}
         </li>
     );
 }
 
 function AssetsUnderManagement() {
     const { data: vaultAssets } = useVaultAssets();
+    const vaultAssetsWorth = useVaultAssetsTotalWorth();
+
     return (
         <li>
             Assets under Management (sum + details)
@@ -47,6 +47,7 @@ function AssetsUnderManagement() {
                 {vaultAssets?.map((assetAddress) => (
                     <VaultAsset assetAddress={assetAddress} />
                 ))}
+                <li>Total: {numberFormat(vaultAssetsWorth, "USD", 2, 18)}</li>
             </ul>
         </li>
     );

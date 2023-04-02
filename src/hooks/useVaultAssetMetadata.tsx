@@ -10,7 +10,7 @@ export type VaultAssetMetadata = {
     decimals: number;
 };
 
-const fetchVaultAssetMetadata = async (
+export const fetchVaultAssetMetadata = async (
     vaultAddress: string,
     assetAddress: string
 ) =>
