@@ -8,6 +8,7 @@ import { createClient, WagmiConfig } from "wagmi";
 import MainAppBar from "./components/MainAppBar";
 import AssetsUnderManagement from "./components/AssetsUnderManagement";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import VaultShares from "./components/VaultShares";
 
 export default function Home() {
     const anvil = Object.assign(
@@ -49,7 +50,7 @@ export default function Home() {
                                     <h2>Vault Information</h2>
                                     <ul>
                                         <AssetsUnderManagement></AssetsUnderManagement>
-                                        <li>Number of Shares</li>
+                                        <VaultShares></VaultShares>
                                         <li>
                                             Vault Share Price (balancer pool)
                                         </li>

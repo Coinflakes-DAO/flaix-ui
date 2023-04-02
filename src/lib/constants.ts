@@ -10,3 +10,6 @@ export const BN_ZERO = BigNumber.from(0);
 export const BN_ONE = BigNumber.from(1);
 
 export const BN_10E = (exp: number): BigNumber => BigNumber.from(10).pow(exp);
+
+export const ADDR_BLACKHOLE = "0x0000000000000000000000000000000000000000";
+export const ADDR_DEADBEEF = "0x00000000000000000000000000000000deadbeef";

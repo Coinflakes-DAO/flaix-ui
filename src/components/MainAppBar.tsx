@@ -31,7 +31,9 @@ export default function MainAppBar() {
                     >
                         <Link
                             href={
-                                chain?.blockExplorers?.default.url + "/address/"
+                                chain?.blockExplorers?.default.url +
+                                "/address/" +
+                                vault?.address
                             }
                             target={"_blank"}
                             underline="none"
@@ -48,7 +50,9 @@ export default function MainAppBar() {
                         color={"inherit"}
                     >
                         <Link
-                            href={"https://debank.com/profile/"}
+                            href={
+                                "https://debank.com/profile/" + vault?.address
+                            }
                             target={"_blank"}
                             underline="none"
                             rel="noreferrer"
