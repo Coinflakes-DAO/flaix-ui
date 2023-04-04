@@ -35,7 +35,7 @@ function VaultShares() {
                     Total Shares:{" "}
                     {numberFormat(totalShares, symbol, 2, decimals)}
                 </li>
-                <li>Share Price: {numberFormat(sharePrice, "USD", 2, 18)}</li>
+                <li>Share FMV: {numberFormat(sharePrice, "USD", 2, 18)}</li>
                 {userShares.gt(BN_ZERO) && (
                     <li>
                         Your Shares:{" "}
